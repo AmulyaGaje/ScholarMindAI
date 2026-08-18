@@ -1,0 +1,40 @@
+# =============================================================================
+# ScholarMind AI – Backend Requirements
+# Python 3.11+ / Python 3.13 compatible dependencies
+# =============================================================================
+
+# --- Core Web Framework ---
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# --- Database (Async) ---
+sqlalchemy==2.0.23
+asyncpg==0.31.0          # Async PostgreSQL driver
+alembic==1.12.1
+psycopg2-binary==2.9.9   # Sync driver for migrations
+
+# --- Pydantic (Data Validation + Settings) ---
+pydantic==2.5.2
+pydantic-settings==2.1.0
+email-validator==2.1.0   # Required for Pydantic EmailStr
+
+# --- Authentication & Password Hashing ---
+python-jose[cryptography]==3.3.0  # JWT encoding/decoding
+passlib[bcrypt]==1.7.4            # Passlib context wrapper
+bcrypt==4.0.1                     # Compatible with passlib 1.7.4 & Python 3.13
+
+# --- File Handling ---
+python-multipart==0.0.6  # Required for FastAPI file uploads
+aiofiles==23.2.1         # Async file I/O
+
+# --- Environment & HTTP ---
+python-dotenv==1.0.0
+httpx==0.25.2            # Async HTTP client
+
+# --- Utilities & Logging ---
+python-slugify==8.0.1
+loguru==0.7.2
+
+# --- Testing ---
+pytest==7.4.3
+pytest-asyncio==0.21.1

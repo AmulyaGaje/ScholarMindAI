@@ -1,0 +1,292 @@
+/*
+ * ScholarMind AI – Global Stylesheet
+ * ====================================
+ * Design System:
+ *   - Dark mode first (default)
+ *   - Inter font from Google Fonts
+ *   - CSS custom properties for theme tokens
+ *   - Tailwind CSS directives
+ *   - Custom animations and scrollbar styles
+ */
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── Tailwind Directives ───────────────────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties (Dark Mode – Default) ──────────────────────────── */
+:root {
+  /* Background layers */
+  --color-bg-main:        #0f1117;
+  --color-bg-sidebar:     #161b27;
+  --color-bg-card:        #1e2433;
+  --color-bg-card-hover:  #252d3d;
+  --color-bg-input:       #1a2133;
+  --color-bg-overlay:     rgba(15, 17, 23, 0.85);
+
+  /* Border */
+  --color-border:         #2a3347;
+  --color-border-active:  #6366f1;
+
+  /* Text */
+  --color-text-primary:   #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted:     #475569;
+  --color-text-inverse:   #0f172a;
+
+  /* Accent colors */
+  --color-accent:         #6366f1;
+  --color-accent-hover:   #818cf8;
+  --color-accent-muted:   rgba(99, 102, 241, 0.15);
+  --color-secondary:      #8b5cf6;
+  --color-success:        #10b981;
+  --color-warning:        #f59e0b;
+  --color-danger:         #ef4444;
+  --color-info:           #06b6d4;
+
+  /* Sidebar */
+  --sidebar-width:        256px;
+  --sidebar-width-collapsed: 64px;
+  --navbar-height:        60px;
+
+  /* Shadows */
+  --shadow-card:          0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg:            0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-glow:          0 0 20px rgba(99, 102, 241, 0.25);
+
+  /* Transitions */
+  --transition-base:      all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:      all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Light Mode Override ───────────────────────────────────────────────────── */
+.light {
+  --color-bg-main:        #f8fafc;
+  --color-bg-sidebar:     #ffffff;
+  --color-bg-card:        #ffffff;
+  --color-bg-card-hover:  #f1f5f9;
+  --color-bg-input:       #f1f5f9;
+  --color-bg-overlay:     rgba(248, 250, 252, 0.85);
+
+  --color-border:         #e2e8f0;
+  --color-border-active:  #6366f1;
+
+  --color-text-primary:   #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted:     #94a3b8;
+
+  --shadow-card:          0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-lg:            0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── Base Styles ───────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: var(--transition-base);
+  }
+
+  a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  input, textarea, select {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-muted);
+    color: var(--color-text-primary);
+  }
+}
+
+/* ─── Component Utilities ───────────────────────────────────────────────────── */
+@layer components {
+  /* Glass card effect */
+  .glass-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-base);
+  }
+
+  .glass-card:hover {
+    background: var(--color-bg-card-hover);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow-card), 0 0 0 1px rgba(99, 102, 241, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Accent gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Sidebar nav active state */
+  .nav-item-active {
+    background: var(--color-accent-muted);
+    color: var(--color-accent);
+    border-right: 2px solid var(--color-accent);
+  }
+
+  /* Input field */
+  .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--color-bg-input);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    transition: var(--transition-base);
+    outline: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-muted);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  /* Scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 4px;
+  }
+
+  /* Skeleton loading effect */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-card) 25%,
+      var(--color-bg-card-hover) 50%,
+      var(--color-bg-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 6px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* Page header */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* ─── Animation Keyframes ───────────────────────────────────────────────────── */
+@layer utilities {
+  @keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(99, 102, 241, 0.3); }
+    50%       { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
+  }
+
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-fade-in  { animation: fadeIn 0.3s ease-out forwards; }
+  .animate-slide-in { animation: slideInLeft 0.3s ease-out forwards; }
+  .animate-pulse-glow { animation: pulse-glow 2s infinite; }
+  .animate-spin-slow  { animation: spin-slow 3s linear infinite; }
+}
+
+/* ─── Custom Scrollbar (Webkit) ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
