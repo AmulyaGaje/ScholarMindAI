@@ -5,3 +5,4 @@ from app.models.history import HistorySession
 from app.models.bookmark import Bookmark
 from app.models.upload import Upload
 from app.models.analysis import PaperAnalysis
+from app.models.document_chunk import DocumentChunk

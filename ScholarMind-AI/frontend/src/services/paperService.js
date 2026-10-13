@@ -22,6 +22,13 @@ const paperService = {
     });
     return response.data;
   },
+
+  // RAG & Advanced AI Endpoints
+  chat: async (paperId, query, chatHistory = []) =>
+    (await api.post(`/papers/${paperId}/chat`, { query, chat_history: chatHistory })).data,
+  compare: async (paperIds) => (await api.post('/papers/compare', { paper_ids: paperIds })).data,
+  getResearchGaps: async (paperIds) => (await api.post('/papers/research-gaps', { paper_ids: paperIds })).data,
+  getRecommendations: async () => (await api.get('/papers/recommendations')).data,
 };
 
 export default paperService;

@@ -1,7 +1,7 @@
 """
 ScholarMind AI – Paper Analysis Service
 ========================================
-Handles paper extraction, background AI analysis execution, and PostgreSQL database updates.
+Handles paper extraction, background AI analysis execution, RAG vector indexing, and PostgreSQL updates.
 """
 
 import uuid
@@ -28,7 +28,7 @@ async def get_analysis_by_paper_id(db: AsyncSession, paper_id: uuid.UUID) -> Opt
 
 async def process_and_analyze_paper(db: AsyncSession, paper_id: uuid.UUID, user_id: uuid.UUID) -> PaperAnalysis:
     """
-    Executes full paper text extraction and AI analysis pipeline.
+    Executes full paper text extraction, RAG vector indexing, and AI analysis pipeline.
     Saves results to paper_analyses table.
     """
     # 1. Fetch paper record
@@ -54,10 +54,17 @@ async def process_and_analyze_paper(db: AsyncSession, paper_id: uuid.UUID, user_
     await db.commit()
     await db.refresh(analysis)
 
-    # 3. Process PDF & execute AI Analysis
+    # 3. Process PDF, RAG indexing & execute AI Analysis
     try:
         pdf_text, page_count = extract_text_from_pdf(paper.file_path)
         paper.page_count = page_count
+
+        # RAG Chunking & Vector Indexing in PostgreSQL pgvector table
+        try:
+            from app.services.rag_service import index_paper_chunks
+            await index_paper_chunks(db, paper_id, user_id, pdf_text)
+        except Exception as chunk_ex:
+            logger.warning(f"RAG Chunk indexing warning for paper {paper_id}: {chunk_ex}")
         
         analysis_data = await analyze_paper_text(paper.title, pdf_text, page_count)
 

@@ -22,7 +22,7 @@ from fastapi.exceptions import RequestValidationError
 
 from app.core.config import settings
 from app.core.database import engine, Base
-from app.routers import auth, projects, papers, history, search, bookmarks, stats, analysis
+from app.routers import auth, projects, papers, history, search, bookmarks, stats, analysis, rag
 from app.middleware.logging_middleware import LoggingMiddleware
 
 # ── Logging Setup ─────────────────────────────────────────────────────────────
@@ -129,6 +129,7 @@ app.include_router(auth.router,       prefix=f"{PREFIX}/auth",      tags=["🔐 
 app.include_router(projects.router,   prefix=f"{PREFIX}/projects",  tags=["📁 Projects"])
 app.include_router(papers.router,     prefix=f"{PREFIX}/papers",    tags=["📄 Papers"])
 app.include_router(analysis.router,   prefix=f"{PREFIX}/papers",    tags=["🤖 Stage 1 AI Analysis"])
+app.include_router(rag.router,        prefix=f"{PREFIX}/papers",    tags=["🧠 RAG & AI Q&A"])
 app.include_router(history.router,    prefix=f"{PREFIX}/history",   tags=["🕐 History"])
 app.include_router(search.router,     prefix=f"{PREFIX}/search",    tags=["🔍 Search"])
 app.include_router(bookmarks.router,  prefix=f"{PREFIX}/bookmarks", tags=["🔖 Bookmarks"])

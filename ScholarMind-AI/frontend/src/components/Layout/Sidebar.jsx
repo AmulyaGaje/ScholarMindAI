@@ -27,7 +27,7 @@ const NAV_ITEMS = [
   { to: '/search',       icon: Search,          label: 'Search' },
   { to: '/library',      icon: BookOpen,        label: 'My Library' },
   { to: '/projects',     icon: FolderKanban,    label: 'Projects' },
-  { to: '/ai-assistant', icon: Sparkles,        label: 'AI Assistant', badge: 'Stage 2' },
+  { to: '/ai-assistant', icon: Sparkles,        label: 'AI Assistant', badge: 'RAG' },
   { to: '/history',      icon: Clock,           label: 'History' },
   { to: '/bookmarks',    icon: Bookmark,        label: 'Bookmarks' },
 ];
